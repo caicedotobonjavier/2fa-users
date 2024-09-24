@@ -49,6 +49,7 @@ class UserSerializer(serializers.ModelSerializer):
         return super().validate(attrs)
 
     def create(self, validated_data: dict):
+        
         otp_base32 = pyotp.random_base32()
         email = validated_data.get("email")
         otp_auth_url = pyotp.totp.TOTP(otp_base32).provisioning_uri(
